@@ -59,7 +59,7 @@
   </joint>
   
   <joint name="flexiv_hand_joint" type="fixed">
-    <parent link="panda_link7"/>
+    <parent link="link7"/>
     <child link="base_hand"/>
     <origin rpy="0 0 -0.785398163397" xyz="0 0 0.107"/>
   </joint>
