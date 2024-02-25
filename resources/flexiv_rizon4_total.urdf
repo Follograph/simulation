@@ -57,16 +57,23 @@
     <child link="flange" />
     <origin rpy="0.0 0.0 -3.141592653589793" xyz="0.0 0.0 0.081" />
   </joint>
+  
+  <joint name="flexiv_hand_joint" type="fixed">
+    <parent link="panda_link7"/>
+    <child link="base_hand"/>
+    <origin rpy="0 0 -0.785398163397" xyz="0 0 0.107"/>
+  </joint>
+  
   <joint name="open_fingers_tcp_joint" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 0.15"/>
-    <parent link="link7"/>
+    <parent link="base_hand"/>
     <child link="tcp"/>
     <axis xyz="0 0 1"/>
   </joint>
 
   <joint name="closed_fingers_tcp_joint" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 0.20"/>
-    <parent link="link7"/>
+    <parent link="base_hand"/>
     <child link="closed_fingers_tcp"/>
     <axis xyz="0 0 1"/>
   </joint>
@@ -74,7 +81,7 @@
   <!-- left finger joints -->
   <joint name="left_outer_knuckle_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 -0.0325 0.0825"/>
-    <parent link="link7"/>
+    <parent link="base_hand"/>
     <child link="left_outer_bar"/>
     <axis xyz="1 0 0"/>
     <limit effort="0" lower="-0.155" upper="0.7854" velocity="2.0"/>
@@ -82,7 +89,7 @@
   </joint>
   <joint name="left_inner_knuckle_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 -0.0165 0.0995"/>
-    <parent link="link7"/>
+    <parent link="base_hand"/>
     <child link="left_inner_bar"/>
     <axis xyz="1 0 0"/>
     <limit effort="0" lower="-0.155" upper="0.7854" velocity="2.0"/>
@@ -112,7 +119,7 @@
   <!-- right finger joints -->
   <joint name="right_outer_knuckle_joint" type="revolute">
     <origin rpy="0 0 3.141592653589793" xyz="0 0.0325 0.0825"/>
-    <parent link="link7"/>
+    <parent link="base_hand"/>
     <child link="right_outer_bar"/>
     <axis xyz="1 0 0"/>
     <limit effort="0" lower="-0.155" upper="0.7854" velocity="2.0"/>
@@ -120,7 +127,7 @@
   </joint>
   <joint name="right_inner_knuckle_joint" type="revolute">
     <origin rpy="0 0 3.141592653589793" xyz="0 0.0165 0.0995"/>
-    <parent link="link7"/>
+    <parent link="base_hand"/>
     <child link="right_inner_bar"/>
     <axis xyz="1 0 0"/>
     <limit effort="0" lower="-0.155" upper="0.7854" velocity="2.0"/>
@@ -309,7 +316,26 @@
   </link>
   <link name="flange" />
   
-  
+  <link name="base_hand">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.057"/>
+      <mass value="1.186"/>
+      <inertia ixx="3E-3" ixy="0" ixz="0" iyy="3E-3" iyz="-0" izz="1E-3"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 1.5707963267948966" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="meshes/grav/visual/base.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="flexiv_black"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 1.5707963267948966" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="meshes/grav/collision/base.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
   <link name="left_outer_bar">
     <inertial>
         <origin xyz="0 0 0.029" rpy="0 0 0" />
@@ -464,6 +490,14 @@
     </inertial>
   </link>
   
+  <joint name="finger_width_joint" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="base_hand"/>
+    <child link="unused_finger_width_link"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="80" lower="0" upper="0.100" velocity="0.2"/>
+  </joint>
+
   <link name="unused_finger_width_link">
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
