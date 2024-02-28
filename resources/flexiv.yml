@@ -10,7 +10,7 @@ robot_cfg:
     asset_root_path: "robot/flexiv_description"
     
     base_link: "base_link"
-    ee_link: "base_hand"
+    ee_link: "tcp"
     link_names: null
     lock_joints: null
     extra_links: null
@@ -27,49 +27,67 @@ robot_cfg:
         "link6",
         "link7",
         "base_hand",
-        "left_outer_bar",
-        "left_inner_bar",
         "left_finger_mount",
         "left_finger_tip",
-        "right_outer_bar",
-        "right_inner_bar",
         "right_finger_mount",
         "right_finger_tip",
       ]      
     collision_spheres:
+      base_link:
+        - "center": [0.0, 0.0, 0.082]
+          "radius": 0.09
       link1:
-        - "center": [0.002, -0.005, 0.108]
-          "radius": 0.093
-        - "center": [0.009, -0.013, 0.206]
-          "radius": 0.084
+        - "center": [-0.0, 0.0, 0.053]
+          "radius": 0.09
+        - "center": [-0.0, 0.0, 0.199]
+          "radius": 0.09
+        - "center": [-0.0, 0.0, 0.126]
+          "radius": 0.09
       link2:
-        - "center": [-0.001, 0.037, 0.129]
-          "radius": 0.085
-        - "center": [0.002, 0.042, 0.015]
-          "radius": 0.082
+        - "center": [0.0, 0.055, 0.022]
+          "radius": 0.09
+        - "center": [0.0, 0.037, 0.138]
+          "radius": 0.08
       link3:
-        - "center": [-0.005, 0.003, 0.07]
-          "radius": 0.083
-        - "center": [-0.014, 0.011, 0.173]
-          "radius": 0.079
+        - "center": [0.0, -0.0, 0.059]
+          "radius": 0.08
+        - "center": [-0.006, 0.022, 0.183]
+          "radius": 0.08
       link4:
-        - "center": [-0.012, 0.029, 0.115]
-          "radius": 0.084
-        - "center": [-0.005, 0.036, 0.015]
+        - "center": [0.0, 0.042, 0.017]
+          "radius": 0.08
+        - "center": [-0.013, 0.029, 0.129]
           "radius": 0.08
       link5:
-        - "center": [-0.001, -0.004, 0.077]
-          "radius": 0.083
-        - "center": [-0.002, -0.011, 0.177]
-          "radius": 0.078
+        - "center": [0.0, -0.0, 0.046]
+          "radius": 0.07
+        - "center": [0.0, -0.009, 0.185]
+          "radius": 0.07
+        - "center": [0.0, -0.005, 0.116]
+          "radius": 0.07
       link6:
-        - "center": [0.006, 0.056, 0.082]
-          "radius": 0.089
-        - "center": [0.005, 0.043, -0.002]
-          "radius": 0.083
+        - "center": [0.0, 0.043, 0.012]
+          "radius": 0.07
+        - "center": [0.005, 0.067, 0.109]
+          "radius": 0.075
       link7:
-        - "center": [-0.0, 0.002, 0.04]
-          "radius": 0.08
+        - "center": [0.0, 0.0, 0.03]
+          "radius": 0.065
+      base_hand:
+        - "center": [-0.0, -0.0, 0.038]
+          "radius": 0.06
+      left_finger_tip:
+        - "center": [-0.0, 0.003, 0.018]
+          "radius": 0.015
+      right_finger_tip:
+        - "center": [0.0, 0.005, 0.016]
+          "radius": 0.015
+      right_finger_mount:
+        - "center": [-0.0, 0.006, -0.009]
+          "radius": 0.03
+      left_finger_mount:
+        - "center": [0.0, -0.0, -0.009]
+          "radius": 0.03
           
           
     collision_sphere_buffer: 0.005
@@ -84,13 +102,9 @@ robot_cfg:
         "link5": ["link6", "base_hand"],
         "link6": ["link7", "base_hand"],
         "link7": ["base_hand"],
-        "base_hand": ["left_outer_bar", "left_inner_bar", "left_finger_mount", "left_finger_tip", "right_outer_bar", "right_inner_bar", "right_finger_mount", "right_finger_tip"],
-        "left_outer_bar": ["left_inner_bar", "left_finger_mount", "left_finger_tip", "right_outer_bar", "right_inner_bar", "right_finger_mount", "right_finger_tip"],
-        "left_inner_bar": ["left_finger_mount", "left_finger_tip", "right_outer_bar", "right_inner_bar", "right_finger_mount", "right_finger_tip"],
-        "left_finger_mount": ["left_finger_tip", "right_outer_bar", "right_inner_bar", "right_finger_mount", "right_finger_tip"],
-        "left_finger_tip": ["right_outer_bar", "right_inner_bar", "right_finger_mount", "right_finger_tip"],
-        "right_outer_bar": ["right_inner_bar", "right_finger_mount", "right_finger_tip"],
-        "right_inner_bar": ["right_finger_mount", "right_finger_tip"],
+        "base_hand": [ "left_finger_mount", "left_finger_tip", "right_finger_mount", "right_finger_tip"],
+        "left_finger_mount": ["left_finger_tip", "right_finger_mount", "right_finger_tip"],
+        "left_finger_tip": ["right_finger_mount", "right_finger_tip"],
         "right_finger_mount": ["right_finger_tip"],
       }      
     self_collision_buffer: 
@@ -104,12 +118,8 @@ robot_cfg:
         "link6": 0.0,
         "link7": 0.0,
         "base_hand": 0.0,
-        "left_outer_bar": 0.0,
-        "left_inner_bar": 0.0,
         "left_finger_mount": 0.0,
         "left_finger_tip": 0.0,
-        "right_outer_bar": 0.0,
-        "right_inner_bar": 0.0,
         "right_finger_mount": 0.0,
         "right_finger_tip": 0.0,
       }
