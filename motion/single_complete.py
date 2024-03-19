@@ -265,11 +265,6 @@ def main():
 
     while simulation_app.is_running():
         my_world.step(render=True)
-        '''if not my_world.is_playing():
-            if i % 100 == 0:
-                print("**** Click Play to start simulation *****")
-            i += 1
-            continue'''
 
         step_index = my_world.current_time_step_index
 
